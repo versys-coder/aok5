@@ -214,7 +214,7 @@ export default function BookingModal({
           {errorText && <div className="bm-error">{errorText}</div>}
           {status === "sent" && <div className="bm-ok">Заявка отправлена</div>}
 
-          <button className="bm-btn" type="button" disabled={!canSend} onClick={handleSend}>
+          <button className="bm-btn" type="button" disabled>
             {status === "sending" ? "БРОНИРОВАНИЕ..." : "ЗАБРОНИРОВАТЬ"}
           </button>
         </div>

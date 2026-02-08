@@ -7,6 +7,7 @@
   --v3-radius: 22px;
   --v3-tileH: 88px;
   --v3-timeColW: 140px;
+  --v3-colW: minmax(0, 1fr);
 }
 
 .ls-root.is-v3,
@@ -1061,6 +1062,7 @@
   text-align: center;
 }
 
+
 .ls-root.is-v3 .xls-headcell__total{
   font-weight: 900;
   font-size: 22px;
@@ -1185,11 +1187,15 @@
 
 @media (max-width: 640px){
   :root{
-    --v3-timeColW: 86px;
+    --v3-timeColW: 70px;
     --v3-tileH: 70px;
+    --v3-colW: 130px;
   }
 
-  .ls-root.is-v3{ padding: 10px; }
+  .ls-root.is-v3{
+    padding: 4px;
+    --v3-font: "Bebas Neue";
+  }
 
   .ls-root.is-v3 .ls-topbar{
     flex-wrap: wrap;
@@ -1204,12 +1210,77 @@
   .ls-root.is-v3 .ls-week{
     width: 100%;
     justify-content: space-between;
+    gap: 8px;
   }
 
   .ls-root.is-v3 .ls-daypill{
-    min-width: 76px;
+    min-width: 0;
     padding: 6px 8px;
+    flex: 0 0 calc((100% - 16px) / 3);
   }
+
+  .ls-root.is-v3 .ls-days{
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .ls-root.is-v3 .ls-days::-webkit-scrollbar{
+    display: none;
+  }
+
+  .ls-root.is-v3 .xls-wrap{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ls-root.is-v3 .xls-head,
+  .ls-root.is-v3 .xls-row{
+    min-width: calc(var(--v3-timeColW) + var(--v3-colW) * 4);
+    background: var(--v3-bg);
+  }
+
+  .ls-root.is-v3 .xls-section{
+    min-width: calc(var(--v3-timeColW) + var(--v3-colW) * 4);
+  }
+
+  .ls-root.is-v3 .xls-corner--merged{
+    min-width: var(--v3-timeColW);
+    font-size: 10px;
+    line-height: 1.05;
+    padding: 10px 6px;
+  }
+
+  .ls-root.is-v3 .xls-headcell--lux{
+    position: relative;
+  }
+
+  .ls-root.is-v3 .xls-headcell--lux::after{
+    content: "›";
+    position: absolute;
+    right: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    font-weight: 900;
+    color: rgba(15, 23, 42, 0.55);
+    pointer-events: none;
+  }
+
+  .ls-root.is-v3 .xls-wrap::after{
+    content: "›";
+    position: absolute;
+    right: 10px;
+    top: 74px;
+    z-index: 2;
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(15, 23, 42, 0.45);
+    pointer-events: none;
+  }
+
 
   /* ===== Плашки услуг: 5 штук в портрет (перенос, без горизонтального скролла) ===== */
   .ls-root.is-v3 .v3-ctor__list{
@@ -1240,14 +1311,23 @@
   /* ===== Время: перенос строки 12:00\n14:00 ===== */
   .ls-root.is-v3 .xls-time{
     white-space: pre-line;
-    padding: 10px 8px;
+    padding: 8px 4px;
     line-height: 1.05;
+    margin: 4px;
+    font-size: 13px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   /* шапка таблицы: уменьшаем подписи услуг */
-  .ls-root.is-v3 .xls-headcell--merged{ gap: 10px; padding: 12px 8px; min-height: 100px; }
-  .ls-root.is-v3 .xls-headcell__title{ font-size: 12px; letter-spacing: .02em; }
+  .ls-root.is-v3 .xls-headcell--merged{ gap: 6px; padding: 10px 6px; min-height: 92px; }
+  .ls-root.is-v3 .xls-headcell__title{ font-size: 11px; letter-spacing: .02em; }
   .ls-root.is-v3 .xls-headcell__total{ font-size: 18px; }
+
+  .ls-root.is-v3 .xls-cell{ padding: 4px; }
 
   /* компактнее цифры в карточках */
   .ls-root.is-v4 .xls-card .v4-split-num{ font-size: 24px !important; }
