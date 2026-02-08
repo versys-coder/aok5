@@ -9,3 +9,6 @@ build/
 *.env.*
 .DS_Store
 .vscode/
+
+# local legacy folder
+frontend/
