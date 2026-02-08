@@ -1,0 +1,774 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;500;700&display=swap");
+
+:root {
+  --ink: #0f172a;
+  --muted: rgba(15, 23, 42, 0.62);
+
+  --grid-border: #cfcfcf;
+  --cell-bg: #f2f2f2;
+  --past-cell-bg: #eef0f5;
+
+  --timebar-color: #8358e0;
+  --timebar-text: #fff;
+
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 14px 38px rgba(60,60,140,0.22);
+}
+
+/* =========================
+   ROOT GRID
+========================= */
+.dbg-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 24px;
+  align-items: start;
+  width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .dbg-shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================
+   LEFT SCHEDULE (ISOLATED)
+========================= */
+.ls-root,
+.ls-root * {
+  font-family: "Roboto Condensed", "Roboto", system-ui, -apple-system, Segoe UI, Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+.ls-root {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  font-weight: 500;
+
+  /* JS передает 0..1 */
+  --toneGrid: 0.45;
+  --toneCards: 0.55;
+  --toneSections: 0.45;
+}
+
+/* =========================
+   TOP BAR
+========================= */
+.ls-topbar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+/* =========================
+   WEEK PILLS
+========================= */
+.ls-week {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.ls-days {
+  display: flex;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+  flex-wrap: nowrap;
+  overflow: hidden; /* всё в одну строку, невлезающие скрываем */
+}
+
+.ls-daypill {
+  border: 1px solid rgba(15,23,42,0.14);
+  background: rgba(255,255,255,0.92);
+  border-radius: 16px;
+  padding: 9px 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  min-width: 0;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ls-daypill-label {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: rgba(15,23,42,0.78);
+}
+
+.ls-daypill-label.today {
+  color: #0999ff;
+}
+
+.ls-daypill:hover:enabled {
+  transform: translateY(-1px);
+  box-shadow: 0 7px 32px rgba(30,60,180,0.12);
+}
+
+.ls-daypill:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ls-daypill.active {
+  background: linear-gradient(180deg, rgba(9,153,255,0.20), rgba(255,255,255,0.92));
+  border-color: rgba(9,153,255,0.45);
+}
+
+
+.ls-daypill-label {
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: rgba(15,23,42,0.82);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ls-daypill-label.today {
+  color: #0999ff;
+}
+
+.ls-title {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--ink);
+  margin-right: 8px;
+}
+
+.ls-nav {
+  display: flex;
+  gap: 8px;
+}
+
+
+.ls-tuner {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid rgba(15,23,42,0.10);
+  border-radius: 14px;
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+}
+
+.ls-tuner-row {
+  display: grid;
+  grid-template-columns: 64px 120px;
+  gap: 10px;
+  align-items: center;
+}
+
+.ls-tuner-row span {
+  font-weight: 700;
+  color: rgba(15,23,42,0.70);
+  font-size: 13px;
+}
+
+.ls-tuner-row input[type="range"] {
+  width: 120px;
+}
+
+/* =========================
+   UI BUTTONS
+========================= */
+.ui-btn {
+  border: 1px solid rgba(15,23,42,0.16);
+  background: rgba(255,255,255,0.88);
+  padding: 8px 12px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-weight: 800;
+  color: var(--ink);
+  box-shadow: 0 10px 24px rgba(15,23,42,0.08);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.ui-btn--circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  padding: 0;
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ui-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(15,23,42,0.12);
+  background: #fff;
+}
+
+.ui-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.ui-btn--ghost {
+  background: transparent;
+  box-shadow: none;
+}
+
+.mode-switch {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.ui-pill {
+  border: 1px solid rgba(15,23,42,0.16);
+  background: rgba(255,255,255,0.9);
+  padding: 10px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--ink);
+  box-shadow: 0 12px 28px rgba(15,23,42,0.10);
+  transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+}
+
+.ui-pill:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 42px rgba(15,23,42,0.14);
+  background: #fff;
+}
+
+.ui-pill.active {
+  background: linear-gradient(180deg, rgba(59,130,246,0.20), rgba(255,255,255,0.92));
+  border-color: rgba(59,130,246,0.40);
+}
+
+/* =========================
+   ROW / GRID
+========================= */
+.ls-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+}
+
+.ls-time {
+  font-size: 20px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.ls-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* =========================
+   CARD ANIMATION (SMOOTH)
+========================= */
+@keyframes ls-card-in {
+  0% {
+    opacity: 0;
+    transform: translateY(22px) scale(0.94);
+    filter: blur(6px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.01);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.ls-card {
+  border-radius: 18px;
+  padding: 14px;
+  min-height: 120px;
+  border: 1px solid rgba(15,23,42,0.08);
+  box-shadow: var(--shadow-md);
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  cursor: pointer;
+
+  animation: ls-card-in 0.8s cubic-bezier(.22,.61,.36,1) both;
+  transition:
+    transform .25s cubic-bezier(.22,.61,.36,1),
+    box-shadow .25s cubic-bezier(.22,.61,.36,1);
+}
+
+.ls-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.ls-card.active {
+  outline: 2px solid #3b82f6;
+}
+
+.ls-range-time {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ls-name {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.ls-meta {
+  margin-top: auto;
+  font-size: 13px;
+  font-weight: 600;
+  color: #64748b;
+}
+
+/* =========================
+   EXCEL-LIKE LAYOUT
+========================= */
+.xls-empty {
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.85);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 12px 30px rgba(15,23,42,0.08);
+  font-weight: 800;
+}
+
+.xls-wrap {
+  border-radius: 16px;
+  border: 1px solid var(--grid-border);
+  background: #fff;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+  overflow: hidden; /* без внутренних скроллов */
+  width: 100%;
+  min-width: 0;
+}
+
+.xls-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+}
+
+.xls-row {
+  display: grid;
+  grid-template-columns: var(--grid-cols);
+}
+
+.xls-head {
+  background: rgba(15,23,42, calc(var(--toneGrid) * 0.04));
+  border-bottom: 1px solid rgba(15,23,42,0.12);
+}
+
+.xls-count {
+  background: rgba(9,153,255, calc(var(--toneGrid) * 0.06));
+  border-bottom: 1px solid rgba(15,23,42,0.12);
+}
+
+.xls-corner {
+  padding: 12px 12px;
+  border-right: 1px solid rgba(15,23,42,0.12);
+}
+
+.xls-corner--sub {
+  font-weight: 900;
+  color: rgba(15,23,42,0.75);
+}
+
+.xls-headcell,
+.xls-countcell {
+  padding: 12px 12px;
+  border-right: 1px solid rgba(15,23,42,0.12);
+  min-width: 0;
+}
+
+.xls-headcell {
+  font-weight: 900;
+  line-height: 1.2;
+  white-space: normal;
+  word-break: break-word;
+}
+
+.xls-countcell {
+  font-weight: 900;
+  font-size: 18px;
+}
+
+.xls-body {
+  padding: 10px;
+  transition: opacity .22s ease, transform .22s ease;
+}
+
+.xls-body.switching {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.xls-section {
+  user-select: none;
+  cursor: pointer;
+  padding: 12px 12px;
+  border-radius: 14px;
+  background: rgba(9,153,255, calc(var(--toneSections) * 0.12));
+  border: 1px solid rgba(15,23,42,0.14);
+  font-weight: 900;
+  color: rgba(15,23,42,0.85);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.xls-section:hover {
+  box-shadow: 0 14px 30px rgba(15,23,42,0.10);
+}
+
+.xls-arrow {
+  transition: transform .18s ease;
+  transform: rotate(-90deg);
+}
+
+.xls-arrow.open {
+  transform: rotate(0deg);
+}
+
+.xls-section-hint {
+  margin-left: auto;
+  font-weight: 800;
+  color: rgba(15,23,42,0.55);
+  font-size: 12px;
+}
+
+.xls-time {
+  padding: 14px 12px;
+  font-weight: 900;
+  color: rgba(15,23,42,0.72);
+  border-right: 1px solid rgba(15,23,42,0.12);
+  border-bottom: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.85);
+  white-space: nowrap;
+}
+
+.xls-cell {
+  padding: 2px;
+  background: rgba(15,23,42, calc(var(--toneGrid) * 0.03));
+  border-right: 1px solid rgba(15,23,42,0.12);
+  border-bottom: 1px solid rgba(15,23,42,0.12);
+  min-width: 0;
+}
+
+.xls-card {
+  min-height: 116px;
+  padding: 0;
+  border-radius: 10px;
+  background: #fff;
+  overflow: hidden;
+  border: 0 solid rgba(15,23,42,0.10);
+  box-shadow: var(--shadow-md);
+}
+
+.xls-card.free {
+    border: 1px solid rgba(185,28,28,0.35);
+background: rgba(8, 96, 102, 0.33);
+opacity: 0.82;
+}
+
+.xls-card.busy {
+border: 1px solid rgba(185,28,28,0.35);
+background: rgba(114, 4, 74, 0.33);
+opacity: 0.82;
+}
+
+.xls-card.past {
+  opacity: 0.55 !important;
+  background: var(--past-cell-bg) !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+}
+
+.xls-card.busy:hover,
+.xls-card.past:hover {
+  transform: none;
+  box-shadow: var(--shadow-md);
+  cursor: not-allowed;
+}
+
+.xls-timebar {
+  background: rgba(9,153,255, calc(var(--toneCards) * 0.12));
+  color: rgba(15,23,42,0.90);
+  font-size: 16px;
+  font-weight: 700;
+  min-height: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  letter-spacing: 0.02em;
+}
+
+.xls-card-main {
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.xls-free {
+  font-weight: 700;
+  font-size: 15px;
+  color: rgba(15,23,42,0.85);
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.xls-free-num {
+  font-weight: 900;
+  font-size: 28px;
+  color: rgba(15,23,42,0.92);
+  line-height: 1;
+}
+
+.ls-tip-sub {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(15,23,42,0.65);
+  font-weight: 700;
+}
+
+/* =========================
+   CONSTRUCTOR (EXTRAS)
+========================= */
+.ex-panel {
+  border-radius: 18px;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(15,23,42,0.12);
+  box-shadow: 0 16px 44px rgba(15,23,42,0.10);
+  padding: 12px;
+}
+
+.ex-head {
+  padding: 8px 6px 10px;
+}
+
+.ex-title {
+  font-weight: 900;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.ex-sub {
+  margin-top: 4px;
+  font-weight: 800;
+  color: rgba(15,23,42,0.55);
+  font-size: 12px;
+}
+
+.ex-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ex-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.8);
+  border-radius: 14px;
+  padding: 10px 12px;
+  box-shadow: 0 10px 22px rgba(15,23,42,0.06);
+}
+
+.ex-item.picked {
+  border-color: rgba(34,197,94,0.30);
+  background: rgba(34,197,94,0.08);
+}
+
+.ex-item-title {
+  font-weight: 900;
+  color: rgba(15,23,42,0.88);
+}
+
+.ex-add {
+  margin-left: auto;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,0.14);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 900;
+  font-size: 18px;
+  box-shadow: 0 10px 22px rgba(15,23,42,0.10);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.ex-add:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 36px rgba(15,23,42,0.14);
+}
+
+.ex-add:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.ex-hint {
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 12px;
+  color: rgba(15,23,42,0.55);
+}
+
+.ex-cart {
+  border-radius: 18px;
+  background: rgba(255,255,255,0.86);
+  border: 1px solid rgba(15,23,42,0.12);
+  box-shadow: 0 16px 44px rgba(15,23,42,0.10);
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.ex-cart-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.ex-cart-title {
+  font-weight: 900;
+  color: var(--ink);
+}
+
+.ex-empty {
+  color: rgba(15,23,42,0.55);
+  font-weight: 700;
+}
+
+.ex-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ex-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,0.14);
+  background: rgba(255,255,255,0.92);
+  font-weight: 900;
+  color: rgba(15,23,42,0.82);
+  box-shadow: 0 10px 22px rgba(15,23,42,0.08);
+}
+
+.ex-chip-x {
+  border: none;
+  background: rgba(15,23,42,0.08);
+  color: rgba(15,23,42,0.85);
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.ex-chip-x:hover {
+  background: rgba(15,23,42,0.12);
+}
+
+/* =========================
+   RIGHT PANEL
+========================= */
+.dbg-right {
+  position: sticky;
+  top: 16px;
+}
+
+/* =========================
+   STEP BAR
+========================= */
+.dbg-stepbar {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.dbg-stepbar button {
+  border: 1px solid rgba(0,0,0,0.25);
+  background: #f3f4f6;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.dbg-stepbar button:hover {
+  background: #e5e7eb;
+}
+
+/* =========================
+   TOOLTIP (PORTAL, SMOOTH)
+========================= */
+@keyframes ls-tooltip-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) scale(0.9);
+    filter: blur(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+.ls-tooltip {
+  position: fixed;
+  width: 320px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 30px 90px rgba(15,23,42,0.3);
+  border: 1px solid rgba(15,23,42,0.08);
+  padding: 12px;
+  pointer-events: none;
+  z-index: 9999;
+
+  animation: ls-tooltip-in 0.45s cubic-bezier(.22,.61,.36,1) both;
+}
+
+.ls-tooltip img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-bottom: 8px;
+}

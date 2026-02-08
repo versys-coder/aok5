@@ -1,0 +1,1255 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+
+:root {
+  --v3-maxWidth: 1200px;
+  --v3-radius: 22px;
+  --v3-tileH: 88px;
+  --v3-timeColW: 140px;
+}
+
+.ls-root.is-v3,
+.ls-root.is-v3 * {
+  font-family: var(--v3-font) !important;
+}
+
+.ls-root.is-v3 {
+  max-width: var(--v3-maxWidth);
+  margin: 0 auto;
+  font-size: var(--v3-fontSize);
+  border-radius: var(--v3-radius);
+  padding: 14px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.10);
+  background: rgba(255, 255, 255, 0.92);
+}
+
+.ls-root.is-v3 .ls-topbar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.ls-root.is-v3 .ls-week {
+  justify-content: center;
+}
+
+.ls-root.is-v3 .ls-days {
+  justify-content: center;
+  flex: 0 1 auto;
+
+  /* без горизонтальных скроллов: переносим пилюли */
+  flex-wrap: wrap;
+  overflow: hidden;
+  max-width: none;
+  padding-bottom: 0;
+}
+
+.ls-root.is-v3 .ls-title {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.ls-root.is-v3 .ls-daypill {
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.08);
+  padding: 8px 10px;
+  min-width: 92px;
+}
+
+.ls-root.is-v3 .ls-daypill.active {
+  background: linear-gradient(180deg, rgba(14, 165, 164, 0.16), rgba(255, 255, 255, 0.92));
+  border-color: rgba(14, 165, 164, 0.45);
+}
+
+.ls-root.is-v3 .ls-daypill-label {
+  display: grid;
+  gap: 2px;
+  line-height: 1.05;
+  text-align: center;
+}
+
+.ls-root.is-v3 .ls-daypill-date {
+  font-weight: 900;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.ls-root.is-v3 .ls-daypill-weekday {
+  font-weight: 800;
+  font-size: 11px;
+  color: rgba(15, 23, 42, 0.68);
+}
+
+.ls-root.is-v3 .ui-btn.ui-btn--circle {
+  border-radius: 999px;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.10);
+}
+
+/* TABLE BG */
+.ls-root.is-v3 .xls-wrap {
+  border-radius: var(--v3-radius);
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.10);
+  box-shadow: 0 18px 60px rgba(15, 23, 42, 0.08);
+  position: relative;
+  transform: none !important;
+}
+
+.ls-root.is-v3 .xls-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: var(--v3-bg);
+}
+
+.ls-root.is-v3[data-bg="photo"] .xls-wrap::before {
+  background-image:
+    linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.68)),
+    var(--v3-photo-url);
+  background-size: cover;
+  background-position: center;
+}
+
+.ls-root.is-v3[data-bg="gradient"] .xls-wrap::before {
+  background-image: var(--v3-bg);
+}
+
+.ls-root.is-v3 .xls-sticky,
+.ls-root.is-v3 .xls-body {
+  position: relative;
+  z-index: 1;
+}
+
+.ls-root.is-v3 .xls-sticky,
+.ls-root.is-v3 .xls-head,
+.ls-root.is-v3 .xls-count {
+  background: transparent !important;
+}
+
+.ls-root.is-v3 .xls-headcell,
+.ls-root.is-v3 .xls-countcell,
+.ls-root.is-v3 .xls-corner {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(10px);
+}
+
+.ls-root.is-v3 .xls-section {
+  cursor: pointer;
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  background: linear-gradient(180deg, rgba(14,165,164,0.10), rgba(255,255,255,0.54));
+  backdrop-filter: blur(10px);
+}
+
+.ls-root.is-v3 .xls-row {
+  grid-template-columns: var(--v3-timeColW) repeat(auto-fit, minmax(0, 1fr));
+}
+
+.ls-root.is-v3 .xls-time {
+  background: rgba(255, 255, 255, 0.40) !important;
+  backdrop-filter: blur(10px);
+  border-right: 1px solid rgba(15, 23, 42, 0.10);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+  color: rgba(15, 23, 42, 0.78);
+  font-weight: 700;
+  border-radius: 14px;
+  margin: 6px;
+  padding: 14px 12px;
+}
+
+.ls-root.is-v3 .xls-cell {
+  padding: 6px;
+  background: transparent;
+  border-right: 1px solid rgba(15, 23, 42, 0.10);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.10);
+}
+
+@keyframes v3FadeIn {
+  from { opacity: 0; filter: blur(4px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+.ls-root.is-v3 .xls-card {
+  border-radius: var(--v3-radius);
+  background: rgba(255,255,255,0.62);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+  min-height: var(--v3-tileH);
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  transition: box-shadow 0.14s ease, border-color 0.14s ease, transform 0.14s ease;
+  animation: v3FadeIn 180ms ease both;
+}
+
+.ls-root.is-v3.has-filters .xls-card.free {
+  border-color: rgba(14, 165, 164, 0.70);
+  box-shadow: 0 16px 52px rgba(14, 165, 164, 0.16);
+  transform: translateY(-1px);
+}
+
+.ls-root.is-v3 .xls-card.free {
+  border-color: rgba(14, 165, 164, 0.45);
+  background: linear-gradient(180deg, rgba(14, 165, 164, 0.14), rgba(255, 255, 255, 0.64));
+}
+
+.ls-root.is-v3 .xls-card.busy {
+  border-color: rgba(239, 68, 68, 0.22);
+  background: linear-gradient(180deg, rgba(239, 68, 68, 0.08), rgba(255, 255, 255, 0.64));
+  opacity: 0.88;
+}
+
+.ls-root.is-v3 .xls-card.past {
+  opacity: 0.55 !important;
+  background: rgba(226, 232, 240, 0.62) !important;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.06);
+}
+
+.ls-root.is-v3 .xls-timebar {
+  height: 22px;
+  min-height: 22px;
+  background: linear-gradient(90deg, rgba(14, 165, 164, 0.26), rgba(14, 165, 164, 0.10));
+}
+
+.ls-root.is-v3.has-filters .xls-timebar {
+  background: linear-gradient(90deg, rgba(14,165,164,0.40), rgba(14,165,164,0.14));
+}
+
+.ls-root.is-v3 .xls-card-main {
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ls-root.is-v3 .xls-free--num {
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(15, 23, 42, 0.86);
+}
+
+/* =====================
+   V4 (03_02_2026): split digits in "КОМФОРТ ЭЛИТ"
+   ===================== */
+.ls-root.is-v4 .v4-free-split{
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 10px;
+}
+
+.ls-root.is-v4 .v4-split-num{
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: rgba(15, 23, 42, 0.86);
+}
+
+.ls-root.is-v4 .v4-split-num:disabled{
+  cursor: not-allowed;
+  opacity: .35;
+}
+
+.ls-root.is-v4 .v4-split-num.is-active{
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.ls-root.is-v4 .v4-split-plus{
+  font-weight: 800;
+  font-size: 26px;
+  line-height: 1;
+  opacity: .85;
+}
+
+.ls-root.is-v4 .v4-total-split{
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.ls-root.is-v4 .v4-total-split .v4-split-num{
+  font-weight: 900;
+  font-size: 22px;
+}
+
+
+/* V4: кликабельные цифры (в шапке) */
+.ls-root.is-v4 .xls-headcell .v4-total-split .v4-split-num{
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  cursor: pointer;
+}
+.ls-root.is-v4 .xls-headcell .v4-total-split .v4-split-num:hover{
+  text-decoration: underline;
+}
+.ls-root.is-v4 .xls-headcell .v4-total-split .v4-split-num:focus-visible{
+  outline: 2px solid rgba(14,165,164,0.55);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.ls-root.is-v3 .ls-tooltip {
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.22);
+  background: rgba(255,255,255,0.90);
+  backdrop-filter: blur(12px);
+}
+
+/* MODAL */
+.bm-overlay{
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(15,23,42,0.45);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+.bm-modal{
+  width: min(520px, 100%);
+  border-radius: 22px;
+  background: rgba(255,255,255,0.90);
+  border: 1px solid rgba(15,23,42,0.14);
+  box-shadow: 0 28px 90px rgba(0,0,0,0.28);
+  overflow: hidden;
+}
+.bm-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding: 16px 16px 10px;
+  border-bottom: 1px solid rgba(15,23,42,0.08);
+}
+.bm-title{ font-weight: 800; letter-spacing: .08em; }
+.bm-close{
+  width: 36px; height: 36px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.8);
+  cursor: pointer;
+}
+.bm-photo{
+  height: 160px;
+  background: rgba(15,23,42,0.08);
+}
+.bm-photo img{
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+.bm-photo__placeholder{
+  height: 160px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  text-align: center;
+  color: rgba(15,23,42,0.72);
+  font-weight: 700;
+  background: linear-gradient(180deg, rgba(14,165,164,0.10), rgba(255,255,255,0.82));
+}
+.bm-sub{ padding: 12px 16px; color: rgba(15,23,42,0.78); display:grid; gap:6px; }
+.bm-form{ padding: 14px 16px 18px; display:grid; gap:12px; }
+.bm-phone{
+  display:flex; align-items:center; gap:10px;
+  border: 1px solid rgba(15,23,42,0.12);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.85);
+  padding: 10px 12px;
+}
+.bm-plus{ font-weight: 800; color: rgba(15,23,42,0.75); }
+.bm-input{ border:0; outline:0; background:transparent; width:100%; font-size:16px; }
+.bm-btn{
+  height: 44px;
+  border-radius: 16px;
+  border: 1px solid rgba(14,165,164,0.55);
+  background: rgba(14,165,164,0.18);
+  font-weight: 800;
+  cursor:pointer;
+}
+
+/* CONSTRUCTOR (усилил, чтобы не перебивалось чужими стилями) */
+.v3-extras {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.v3-ctor {
+  width: min(1020px, 100%) !important;
+  border-radius: 18px !important;
+  border: 1px solid rgba(15, 23, 42, 0.10) !important;
+  background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 16px 44px rgba(15, 23, 42, 0.10) !important;
+  padding: 12px !important;
+}
+
+.v3-ctor__head {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  padding: 4px 4px 10px !important;
+}
+
+.v3-ctor__title {
+  font-weight: 900 !important;
+  font-size: 16px !important;
+  color: rgba(15, 23, 42, 0.92) !important;
+}
+
+.v3-ctor__sub {
+  margin-top: 4px !important;
+  font-weight: 800 !important;
+  color: rgba(15, 23, 42, 0.55) !important;
+  font-size: 12px !important;
+}
+
+.v3-ctor__clear {
+  height: 32px !important;
+  padding: 0 12px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  background: rgba(255, 255, 255, 0.92) !important;
+  cursor: pointer !important;
+  font-weight: 800 !important;
+}
+
+.v3-ctor__clear:disabled {
+  opacity: 0.55 !important;
+  cursor: not-allowed !important;
+}
+
+.v3-ctor__list {
+  display: grid !important;
+  gap: 10px !important;
+}
+
+.v3-ctor__row {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  border: 1px solid rgba(15, 23, 42, 0.12) !important;
+  background: rgba(255, 255, 255, 0.80) !important;
+  border-radius: 14px !important;
+  padding: 10px 12px !important;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.06) !important;
+  cursor: pointer !important;
+}
+
+.v3-ctor__row.picked {
+  border-color: rgba(14, 165, 164, 0.45) !important;
+  background: rgba(14, 165, 164, 0.08) !important;
+}
+
+.v3-ctor__label {
+  font-weight: 900 !important;
+  color: rgba(15, 23, 42, 0.88) !important;
+}
+
+.v3-ctor__mark {
+  margin-left: auto !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(15, 23, 42, 0.14) !important;
+  background: #fff !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  font-weight: 900 !important;
+  font-size: 18px !important;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.10) !important;
+}
+
+.v3-ctor__row.picked .v3-ctor__mark {
+  border-color: rgba(14, 165, 164, 0.55) !important;
+  background: rgba(14, 165, 164, 0.12) !important;
+}
+/* Smooth accordion */
+.ls-root.is-v3 .xls-acc{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: max-height 280ms ease, opacity 200ms ease, transform 280ms ease;
+}
+
+.ls-root.is-v3 .xls-acc.open{
+  max-height: 2200px; /* достаточно для всех строк секции */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* таблица без горизонтальных скроллов */
+.ls-root.is-v3 .xls-wrap{
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.ls-root.is-v3 .xls-row{
+  display: grid;
+  grid-template-columns: var(--grid-cols);
+  min-width: 0;
+}
+
+/* красные карточки (busy) */
+.ls-root.is-v3 .xls-card.busy{
+  border-color: rgba(239,68,68,0.55) !important;
+  background: linear-gradient(180deg, rgba(239,68,68,0.18), rgba(255,255,255,0.70)) !important;
+  box-shadow: 0 16px 44px rgba(239,68,68,0.14) !important;
+}
+
+.ls-root.is-v3 .xls-card.busy .xls-timebar{
+  background: linear-gradient(90deg, rgba(239,68,68,0.45), rgba(239,68,68,0.16)) !important;
+}
+
+/* ширина по контейнеру */
+.ls-root.is-v3 .xls-sticky,
+.ls-root.is-v3 .xls-body,
+.ls-root.is-v3 .xls-acc{
+  width: 100%;
+  margin: 0;
+}
+
+/* было: 0.62..0.64 — сделаем плотнее */
+.ls-root.is-v3 .xls-card{
+  background: rgba(255,255,255,0.86);
+}
+
+.ls-root.is-v3 .xls-card.free{
+  background: linear-gradient(180deg, rgba(14,165,164,0.20), rgba(255,255,255,0.88));
+}
+
+.ls-root.is-v3 .xls-card.busy{
+  background: linear-gradient(180deg, rgba(239,68,68,0.22), rgba(255,255,255,0.88)) !important;
+}
+
+/* ===== Отступы ===== */
+.ls-root.is-v3 .xls-wrap{
+  margin-top: 16px;
+}
+
+.v3-extras{
+  margin-top: 18px;
+}
+
+/* ===== "пустая" колонка, чтобы место сохранялось ===== */
+.ls-root.is-v3 .xls-card.ghost{
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* заголовки/итоги скрываем, но место оставляем */
+.ls-root.is-v3 .xls-headcell.is-hidden,
+.ls-root.is-v3 .xls-countcell.is-hidden{
+  color: transparent;
+}
+
+/* левый верхний угол "Номера" */
+.ls-root.is-v3 .xls-corner--title{
+  font-weight: 900;
+  font-size: 16px;
+  text-align: left;
+  padding-left: 16px;
+}
+
+/* ===== Фон: убрать дергание при раскрытии аккордеона ===== */
+/* В фото-режиме НЕ cover, а по ширине 100%, чтобы высота не меняла масштаб */
+.ls-root.is-v3[data-bg="photo"] .xls-wrap::before{
+  background-size: 100% auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+
+/* ===== Цена в модалке (полупрозрачная) ===== */
+.bm-photo{
+  position: relative;
+}
+
+.bm-price{
+  position: absolute;
+  right: 14px;
+  bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 14px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  background: rgba(255,255,255,0.72);
+  border: 1px solid rgba(15,23,42,0.14);
+  box-shadow: 0 10px 22px rgba(15,23,42,0.16);
+  backdrop-filter: blur(10px);
+}
+
+/* Отступ сверху внутри блока расписания (не схлопывается) */
+.ls-root.is-v3{
+  padding-top: 18px;
+}
+
+/* Доп.отступ прямо над таблицей (если нужно больше) */
+.ls-root.is-v3 .xls-wrap{
+  padding-top: 14px;
+}
+
+/* Пустые заглушки (ghost): прозрачные, только рамка */
+.ls-root.is-v3 .xls-card.ghost{
+  opacity: 1 !important;                 /* отменяем прежнее "opacity:0" */
+  pointer-events: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  border: 1px solid rgba(15,23,42,0.12) !important; /* рамка */
+}
+
+/* верхняя полоска тоже убираем */
+.ls-root.is-v3 .xls-card.ghost .xls-timebar{
+  background: transparent !important;
+}
+
+/* высота карточек */
+.ls-root.is-v3 .xls-card{
+  height: 64px;              /* было больше; можешь 72–96 */
+}
+
+/* время слева тоже делаем компактнее */
+.ls-root.is-v3 .xls-time{
+  height: 64px;
+  padding: 14px 16px;
+}
+
+/* уменьшим вертикальные отступы между строками */
+.ls-root.is-v3 .xls-row{
+  gap: 12px;                 /* было больше; можешь 10 */
+  margin-bottom: 12px;
+}
+
+/* секционные заголовки чуть компактнее */
+.ls-root.is-v3 .xls-section{
+  padding: 14px 18px;
+  margin: 10px 0;
+}
+
+/* ===== Конструктор: чипы в одну строку ===== */
+
+.v3-ctor__list{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* каждая опция — компактный чип */
+.v3-ctor__row{
+  width: auto;                 /* убираем растяжение на всю ширину */
+  min-width: 180px;            /* чтобы выглядело ровно */
+  padding: 12px 14px;
+  border-radius: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* текст */
+.v3-ctor__label{
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* кнопка справа (+/✓) компактнее */
+.v3-ctor__mark{
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* выбранный чип — подсветка */
+.v3-ctor__row.picked{
+  background: rgba(14,165,164,0.10);
+  border-color: rgba(14,165,164,0.35);
+}
+
+/* Конструктор: без горизонтальных скроллов */
+.v3-ctor__list{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  overflow-x: hidden !important;
+  padding-bottom: 0 !important;
+}
+
+.v3-ctor__row{
+  width: auto !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+}
+
+/* меньше "шапка" сверху */
+.ls-root.is-v3 .xls-timebar{
+  height: 10px !important;
+  min-height: 10px !important;
+}
+
+/* меньше внутренних отступов вокруг числа */
+.ls-root.is-v3 .xls-card-main{
+  padding: 6px !important;
+}
+
+.ls-root.is-v3 .xls-card{
+  min-height: 64px !important;
+  height: 64px !important;
+}
+
+.ls-root.is-v3 .xls-free--num{
+  font-family: "Bebas Neue", sans-serif !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Закругление ячеек в шапке и строке "Всего" */
+.ls-root.is-v3 .xls-headcell,
+.ls-root.is-v3 .xls-countcell,
+.ls-root.is-v3 .xls-corner{
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* чтобы у них были такие же отступы как у остальных ячеек */
+.ls-root.is-v3 .xls-head .xls-headcell,
+.ls-root.is-v3 .xls-head .xls-corner,
+.ls-root.is-v3 .xls-count .xls-countcell,
+.ls-root.is-v3 .xls-count .xls-corner{
+  margin: 6px;
+}
+
+/* если внутри есть рамки/разделители — убираем "обрезание" по квадрату */
+.ls-root.is-v3 .xls-headcell,
+.ls-root.is-v3 .xls-countcell,
+.ls-root.is-v3 .xls-corner{
+  border: 1px solid rgba(15,23,42,0.10) !important;
+}
+
+/* Центрируем заголовки колонок и значения "Всего" */
+.ls-root.is-v3 .xls-headcell,
+.ls-root.is-v3 .xls-countcell{
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* "Номера" (левый верхний угол) оставим слева или тоже по центру — выбери вариант */
+
+/* вариант А: тоже по центру */
+.ls-root.is-v3 .xls-corner{
+  text-align: center !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Убираем подпрыгивание */
+.ls-root.is-v3 .xls-card{
+  transform: none !important;
+}
+
+/* Hover: только тень/обводка */
+.ls-root.is-v3 .xls-card:hover{
+  transform: none !important;
+  box-shadow: 0 18px 60px rgba(15,23,42,0.18) !important;
+  border-color: rgba(15,23,42,0.22) !important;
+}
+
+/* Если включены фильтры и у free было translateY(-1px) — тоже отключаем */
+.ls-root.is-v3.has-filters .xls-card.free{
+  transform: none !important;
+  box-shadow: none !important; /* базу можно оставить без усиления */
+}
+
+/* Hover для free — аккуратнее, с зелёной обводкой */
+.ls-root.is-v3.has-filters .xls-card.free:hover{
+  box-shadow: 0 18px 60px rgba(14,165,164,0.18) !important;
+  border-color: rgba(14,165,164,0.55) !important;
+}
+
+/* меньше высота зелёной полосы */
+.ls-root.is-v3 .xls-timebar{
+  height: 8px !important;
+  min-height: 8px !important;
+}
+
+/* меньше внутренний отступ вокруг цифры */
+.ls-root.is-v3 .xls-card-main{
+  padding: 3px !important;   /* было 14px */
+}
+
+.ls-root.is-v3 .xls-free--num{
+  font-size: 28px !important;  /* было 34px */
+  line-height: 1 !important;
+}
+
+/* ===== Constructor cards (компактнее, карточки с мини-фото) ===== */
+
+.v3-ctor{ width: 100% !important; max-width: 100% !important; }
+
+.v3-ctor__list{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  overflow-x: hidden !important;
+  padding: 10px 2px 6px !important;
+}
+
+.v3-ctor__card{
+  position: relative;
+  flex: 0 0 auto;
+  width: 220px;
+  height: 112px;
+  border-radius: 18px;
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.86);
+  box-shadow: 0 10px 22px rgba(15,23,42,0.06);
+  padding: 14px 14px 10px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  align-content: space-between;
+  cursor: pointer;
+}
+
+.v3-ctor__cardTitle{
+  font-weight: 900;
+  font-size: 18px;                  /* чуть меньше */
+  color: rgba(15,23,42,0.90);
+}
+
+.v3-ctor__thumb{
+  margin-top: 10px;
+  height: 44px;                      /* маленькое фото снизу */
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,0.10);
+  background: rgba(15,23,42,0.04);
+}
+
+.v3-ctor__thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.v3-ctor__badge{
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  border: 1px solid rgba(15,23,42,0.14);
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 10px 22px rgba(15,23,42,0.10);
+}
+
+.v3-ctor__card.picked{
+  border-color: rgba(14,165,164,0.45);
+  background: rgba(14,165,164,0.08);
+}
+
+.v3-ctor__card.picked .v3-ctor__badge{
+  border-color: rgba(14,165,164,0.55);
+  background: rgba(14,165,164,0.12);
+}
+
+
+.v3-ctor{
+  width: min(980px, 100%) !important; /* ширина конструктора */
+}
+
+.v3-ctor__title{ font-size: 16px !important; }
+.v3-ctor__sub{ font-size: 12px !important; }
+
+/* список — перенос, без горизонтальных скроллов */
+.v3-ctor__list{
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 12px !important;
+  overflow: hidden !important;
+  padding: 10px 2px 6px !important;
+}
+
+/* карточка */
+.v3-ctor__card{
+  flex: 0 0 auto;
+  width: 240px;
+  border-radius: 22px;
+  border: 1px solid rgba(15,23,42,0.12);
+  background: rgba(255,255,255,0.82);
+  box-shadow: 0 14px 34px rgba(15,23,42,0.10);
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+}
+
+/* верхняя "серая" полоска */
+.v3-ctor__top{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 12px 14px;
+  background: linear-gradient(180deg, rgba(15,23,42,0.08), rgba(255,255,255,0.30));
+  border-bottom: 1px solid rgba(15,23,42,0.10);
+}
+
+.v3-ctor__name{
+  font-weight: 900;
+  font-size: 18px; /* меньше/больше тут */
+  color: rgba(15,23,42,0.90);
+}
+
+/* значок справа сверху */
+.v3-ctor__badge{
+  position: absolute;
+  right: 12px;
+  top: 10px;
+  width: 38px;
+  height: 38px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 18px;
+  border: 1px solid rgba(15,23,42,0.14);
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 10px 22px rgba(15,23,42,0.10);
+}
+
+.v3-ctor__card.picked{
+  border-color: rgba(14,165,164,0.45);
+  box-shadow: 0 18px 46px rgba(14,165,164,0.14);
+}
+
+.v3-ctor__card.picked .v3-ctor__badge{
+  border-color: rgba(14,165,164,0.55);
+  background: rgba(14,165,164,0.14);
+}
+
+/* фото снизу */
+.v3-ctor__img{
+  height: 92px;
+  background: rgba(15,23,42,0.06);
+}
+
+.v3-ctor__img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Конструктор: компактнее карточки */
+.v3-ctor__card{
+  width: 190px !important;
+  border-radius: 18px !important;
+}
+
+.v3-ctor__top{
+  padding: 10px 12px !important;
+}
+
+.v3-ctor__name{
+  font-size: 14px !important;
+  font-weight: 900 !important;
+}
+
+.v3-ctor__badge{
+  width: 28px !important;
+  height: 28px !important;
+  border-radius: 12px !important;
+  font-size: 14px !important;
+  right: 10px !important;
+  top: 8px !important;
+}
+
+.v3-ctor__img{
+  height: 64px !important;
+}
+
+/* форс ширины конструктора (должно быть самым последним в файле) */
+.ls-root.is-v3 .v3-extras{ width: 100% !important; }
+
+.ls-root.is-v3 .v3-ctor{
+  width: min(1100px, 100%) !important; /* поставь 900/1000/1200 */
+  max-width: none !important;
+}
+:root{
+  --v3-maxWidth: 1400px; /* было 1200px */
+}
+
+/* убрать только плашку "Всего" (левая ячейка строки totals) */
+.ls-root.is-v3 .xls-count .xls-corner--sub{
+  opacity: 0 !important;
+  pointer-events: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* чтобы место слева осталось и сетка не поехала */
+.ls-root.is-v3 .xls-count .xls-corner--sub::after{
+  content: "";
+}
+
+/* объединенная шапка */
+.ls-root.is-v3 .xls-head--merged{
+  align-items: stretch;
+}
+
+.ls-root.is-v3 .xls-corner--merged{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 18px 14px;
+  font-weight: 800;
+  line-height: 1.1;
+  min-height: 118px; /* высота объединенной шапки */
+}
+
+.ls-root.is-v3 .xls-headcell--merged{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 12px;
+  min-height: 118px; /* высота объединенной шапки */
+}
+
+.ls-root.is-v3 .xls-headcell__title{
+  font-weight: 800;
+  letter-spacing: .03em;
+  text-align: center;
+}
+
+.ls-root.is-v3 .xls-headcell__total{
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1;
+  opacity: .95;
+}
+
+/* кликабельность только для КОМФОРТ/ЛЮКС */
+.ls-root.is-v3 .xls-headcell.is-clickable{
+  cursor: pointer;
+  user-select: none;
+}
+
+/* popup */
+.ls-modal{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: grid;
+  place-items: center;
+  z-index: 9999;
+  padding: 16px;
+}
+
+.ls-modal__card{
+  width: min(560px, 92vw);
+  background: rgba(255,255,255,.92);
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 18px;
+  padding: 16px 16px 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  position: relative;
+}
+
+.ls-modal__close{
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,.10);
+  background: rgba(255,255,255,.75);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.ls-modal__title{
+  font-weight: 900;
+  letter-spacing: .04em;
+  margin: 2px 36px 10px 2px;
+}
+
+.ls-modal__text{
+  white-space: pre-wrap;
+  line-height: 1.35;
+  opacity: .92;
+}
+
+/* фон */
+.ls-modal__overlay{
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.35);
+  z-index: 9990;
+}
+
+/* V4: Bebas только внутри карточек-ячееек (цифры и "+") */
+.ls-root.is-v4 .xls-card .v4-split-num,
+.ls-root.is-v4 .xls-card .v4-split-plus{
+  font-family: "Bebas Neue", "Bebas", sans-serif !important;
+  font-weight: 200 !important;
+  letter-spacing: 0.02em !important;
+}
+/* Выровнять размер цифр в 1-й колонке под остальные */
+.ls-root.is-v4 .xls-card .v4-split-num{
+  font-size: 28px !important;
+}
+
+.ls-root.is-v4 .xls-card .v4-split-plus{
+  font-size: 22px !important;
+}
+
+/* Описание Комфорт/Элит — показывать сверху */
+.ls-modal.ls-modal--top{
+  place-items: start center;
+  padding-top: 44px;
+}
+
+.ls-modal.ls-modal--top .ls-modal__card{
+  margin-top: 0;
+}
+
+.svc-title{
+  white-space: pre-line; /* \n станет переносом строки */
+  text-align: center;    /* если надо как на плитке */
+  line-height: 1.05;     /* чтобы было компактно */
+}
+
+.svc-title{
+  white-space: pre-line;
+}
+
+.ls-root.is-v3 .xls-headcell__title{
+  white-space: pre-line; /* будет уважать \n */
+  text-align: center;
+  line-height: 1.05;
+}
+
+/* =========================
+   Responsive (tablet/mobile)
+   ========================= */
+@media (max-width: 1024px){
+  :root{
+    --v3-maxWidth: 100%;
+    --v3-timeColW: 120px;
+    --v3-tileH: 78px;
+  }
+  .ls-root.is-v3{ padding: 12px; }
+}
+
+@media (max-width: 640px){
+  :root{
+    --v3-timeColW: 86px;
+    --v3-tileH: 70px;
+  }
+
+  .ls-root.is-v3{ padding: 10px; }
+
+  .ls-root.is-v3 .ls-topbar{
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .ls-root.is-v3 .ls-title{
+    flex: 1 0 100%;
+    font-size: 16px;
+  }
+
+  .ls-root.is-v3 .ls-week{
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ls-root.is-v3 .ls-daypill{
+    min-width: 76px;
+    padding: 6px 8px;
+  }
+
+  /* ===== Плашки услуг: 5 штук в портрет (перенос, без горизонтального скролла) ===== */
+  .ls-root.is-v3 .v3-ctor__list{
+    flex-wrap: wrap !important;
+    overflow-x: hidden !important;
+    gap: 6px !important;
+    padding: 8px 2px 6px !important;
+  }
+
+  /* 5 карточек в ряд (с учётом 4 gap'ов по 6px) */
+  .ls-root.is-v3 .v3-ctor__card{
+    width: calc((100% - 24px) / 5) !important;
+    border-radius: 12px !important;
+  }
+
+  .ls-root.is-v3 .v3-ctor__top{ padding: 5px 5px !important; }
+  .ls-root.is-v3 .v3-ctor__name{ font-size: 10px !important; line-height: 1.05 !important; }
+  .ls-root.is-v3 .v3-ctor__badge{
+    width: 18px !important;
+    height: 18px !important;
+    border-radius: 10px !important;
+    font-size: 10px !important;
+    right: 6px !important;
+    top: 6px !important;
+  }
+  .ls-root.is-v3 .v3-ctor__img{ height: 34px !important; }
+
+  /* ===== Время: перенос строки 12:00\n14:00 ===== */
+  .ls-root.is-v3 .xls-time{
+    white-space: pre-line;
+    padding: 10px 8px;
+    line-height: 1.05;
+  }
+
+  /* шапка таблицы: уменьшаем подписи услуг */
+  .ls-root.is-v3 .xls-headcell--merged{ gap: 10px; padding: 12px 8px; min-height: 100px; }
+  .ls-root.is-v3 .xls-headcell__title{ font-size: 12px; letter-spacing: .02em; }
+  .ls-root.is-v3 .xls-headcell__total{ font-size: 18px; }
+
+  /* компактнее цифры в карточках */
+  .ls-root.is-v4 .xls-card .v4-split-num{ font-size: 24px !important; }
+  .ls-root.is-v4 .xls-card .v4-split-plus{ font-size: 18px !important; }
+}

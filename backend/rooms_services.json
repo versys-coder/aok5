@@ -1,0 +1,102 @@
+{
+  "rooms": [
+    {
+      "id": "8b5e0ceb-d6a9-11ec-840b-00155d0a6605",
+      "title": "2 этаж 7 номер ",
+      "type": "comfort",
+      "group": "2f"
+    },
+    {
+      "id": "93417a3a-d6a9-11ec-840b-00155d0a6605",
+      "title": "2 этаж 8 номер ",
+      "type": "comfort",
+      "group": "2f"
+    },
+    {
+      "id": "9e604545-d6a9-11ec-840b-00155d0a6605",
+      "title": "2 этаж Элит номер ",
+      "type": "elite",
+      "group": null
+    },
+    {
+      "id": "0c6fd2bc-d6aa-11ec-840b-00155d0a6605",
+      "title": "3 этаж 7 номер ",
+      "type": "comfort",
+      "group": "3f"
+    },
+    {
+      "id": "17b24d5c-d6aa-11ec-840b-00155d0a6605",
+      "title": "3 этаж 8 номер ",
+      "type": "comfort",
+      "group": "3f"
+    },
+    {
+      "id": "60b45b54-d6aa-11ec-840b-00155d0a6605",
+      "title": "4 этаж 7 номер ",
+      "type": "comfort",
+      "group": "4f"
+    },
+    {
+      "id": "67f5c38c-d6aa-11ec-840b-00155d0a6605",
+      "title": "4 этаж 8 номер ",
+      "type": "comfort",
+      "group": "4f"
+    },
+    {
+      "id": "b8fe34c8-d6aa-11ec-840b-00155d0a6605",
+      "title": "5 этаж 7 номер ",
+      "type": "comfort",
+      "group": "4f"
+    },
+    {
+      "id": "c04921ad-d6aa-11ec-840b-00155d0a6605",
+      "title": "5 этаж 8 номер ",
+      "type": "comfort",
+      "group": "4f"
+    }
+  ],
+  "services": {
+    "elite": {
+      "weekday": {
+        "day": "23ef0056-cf1c-11ef-849a-00155d0a6605",
+        "night": "5964b552-cf1c-11ef-849a-00155d0a6605"
+      },
+      "weekend": {
+        "day": "a51b1e00-cf1c-11ef-849a-00155d0a6605",
+        "night": "0f8e7e87-cf1d-11ef-849a-00155d0a6605"
+      }
+    },
+    "comfort": {
+      "2f": {
+        "weekday": {
+          "day": "d35c669a-cf1e-11ef-849a-00155d0a6605",
+          "night": "fb6fbd7c-cf1e-11ef-849a-00155d0a6605"
+        },
+        "weekend": {
+          "day": "0ccb4d08-cf1f-11ef-849a-00155d0a6605",
+          "night": "2862bb44-cf1f-11ef-849a-00155d0a6605"
+        }
+      },
+      "3f": {
+        "weekday": {
+          "day": "c886d3bd-cf20-11ef-849a-00155d0a6605",
+          "night": "e0627bfd-cf20-11ef-849a-00155d0a6605"
+        },
+        "weekend": {
+          "day": "127add35-cf21-11ef-849a-00155d0a6605",
+          "night": "2895f67c-cf21-11ef-849a-00155d0a6605"
+        }
+      },
+      "4f": {
+        "weekday": {
+          "day": "d9a4bfcd-cf24-11ef-849a-00155d0a6605",
+          "night": "216a018e-cf25-11ef-849a-00155d0a6605"
+        },
+        "weekend": {
+          "day": "5a94032b-cf25-11ef-849a-00155d0a6605",
+          "night": "cd29ef10-cf25-11ef-849a-00155d0a6605"
+        }
+      }
+    }
+  }
+}
