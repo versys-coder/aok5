@@ -1,30 +1,16 @@
 import { useEffect, useState } from "react";
 import type { Slot } from "./LeftScheduleV4";
-import { tariffSlotStartIso } from "../utils/date";
+import { tariffSlotStartIso, todayIso } from "../utils/date";
 import LeftScheduleV4 from "./LeftScheduleV4";
 import BookingModal from "./BookingModal";
 
-function todayIsoMoscow(): string {
-  const parts = new Intl.DateTimeFormat("ru-RU", {
-    timeZone: "Europe/Moscow",
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(new Date());
-
-  const y = parts.find((p) => p.type === "year")?.value ?? "1970";
-  const m = parts.find((p) => p.type === "month")?.value ?? "01";
-  const d = parts.find((p) => p.type === "day")?.value ?? "01";
-  return `${y}-${m}-${d}`;
-}
-
 export default function App() {
-  const [dateIso, setDateIso] = useState<string>(() => todayIsoMoscow());
+  const [dateIso, setDateIso] = useState<string>(() => todayIso());
   const [bookingOpen, setBookingOpen] = useState(false);
 
   // Стартовый слот — просто чтобы модалка имела структуру.
   const [slot, setSlot] = useState<Slot | null>({
-    start_date: `${todayIsoMoscow()}T10:00:00`,
+    start_date: `${todayIso()}T10:00:00`,
     appointment_id: null,
     serviceId: "comfort_elite",
     serviceName: "Комфорт + Элит",

@@ -82,6 +82,9 @@ const BASE_SERVICES: Service[] = [
   { id: "sauna", title: "Сауна", total: 4 },
 ];
 
+const COMFORT_TOTAL = 8;
+const ELITE_TOTAL = 1;
+
 const V3_COLUMNS: V3Column[] = [
   {
     key: "comfort_elite",
@@ -143,6 +146,16 @@ function rangeLabel(startHHMM: string) {
   // 12:00
   // 14:00
   return `${startHHMM}\n${String(endH).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
+}
+
+function renderTitleWithBreaks(title: string) {
+  if (!title.includes("\n")) return title;
+  return title.split("\n").map((t, i, arr) => (
+    <React.Fragment key={i}>
+      {t}
+      {i < arr.length - 1 && <br />}
+    </React.Fragment>
+  ));
 }
 
 /** 00/02/04 относятся к D-1 */
@@ -278,25 +291,10 @@ export default function LeftScheduleV4({
 
   const eliteFreeForStart = (start: string) => (eliteGridDate !== dateIso ? 0 : eliteGrid[start]?.free ?? 0);
   const elitePriceForStart = (start: string) => (eliteGridDate !== dateIso ? null : eliteGrid[start]?.price ?? null);
-  const eliteTotalCount = useMemo(() => {
-    if (eliteGridDate !== dateIso) return 0;
-    const cell = Object.values(eliteGrid)[0];
-    return cell?.total_count ?? 0;
-  }, [eliteGrid, eliteGridDate, dateIso]);
 
   const comfortFreeForStart = (start: string) => (comfortGridDate !== dateIso ? 0 : comfortGrid[start]?.free_count ?? 0);
-  const comfortTotalCount = useMemo(() => {
-    if (comfortGridDate !== dateIso) return 0;
-    const cell = Object.values(comfortGrid)[0];
-    return cell?.total_count ?? 0;
-  }, [comfortGrid, comfortGridDate, dateIso]);
 
-  const comfortEliteTotalLabel = useMemo(() => {
-    if (comfortTotalCount > 0 || eliteTotalCount > 0) {
-      return `${comfortTotalCount}+${eliteTotalCount}`;
-    }
-    return "—";
-  }, [comfortTotalCount, eliteTotalCount]);
+  const comfortEliteTotalLabel = useMemo(() => `${COMFORT_TOTAL}+${ELITE_TOTAL}`, []);
 
   // 7 дней
   const weekDays = useMemo(() => {
@@ -323,7 +321,7 @@ export default function LeftScheduleV4({
   const isVisible = (col: V3Column) => (!visibleSet ? true : visibleSet.has(col.key));
   // Важно: без горизонтальных скроллов. Колонки услуг тянем флексом (1fr),
   // фиксируем только колонку времени.
-  const gridCols = useMemo(() => `var(--v3-timeColW) repeat(${allColumns.length}, minmax(0, 1fr))`, [allColumns.length]);
+  const gridCols = useMemo(() => `var(--v3-timeColW) repeat(${allColumns.length}, var(--v3-colW))`, [allColumns.length]);
 
   const hideTip = () => {
     if (hoverTimer.current) {
@@ -420,7 +418,7 @@ export default function LeftScheduleV4({
                 serviceId: "comfort",
                 serviceName: "Комфорт",
                 free: comfortFree,
-                total: comfortTotalCount,
+                total: COMFORT_TOTAL,
               };
               onSelect(s);
               onSlotClick?.(s);
@@ -434,7 +432,7 @@ export default function LeftScheduleV4({
                 serviceId: "elite",
                 serviceName: "Элит",
                 free: eliteFree,
-                total: eliteTotalCount,
+                total: ELITE_TOTAL,
                 price: elitePrice,
               };
               onSelect(s);
@@ -602,15 +600,8 @@ export default function LeftScheduleV4({
 
               if (c.key === "comfort_elite") {
                 return (
-                  <div key={c.key} className={`xls-headcell xls-headcell--merged ${visible ? "" : "is-hidden"}`}>
-                    <div className="xls-headcell__title">
-{c.title.split("\n").map((t, i, arr) => (
-  <React.Fragment key={i}>
-    {t}
-    {i < arr.length - 1 && <br />}
-  </React.Fragment>
-))}
-                    </div>
+                  <div key={c.key} className={`xls-headcell xls-headcell--merged xls-headcell--${c.key} ${visible ? "" : "is-hidden"}`}>
+                    <div className="xls-headcell__title">{renderTitleWithBreaks(c.title)}</div>
 
                     {/* Totals from API grid (fallback to dash while loading) */}
                     <div className="xls-headcell__total v4-total-split" aria-label="Комфорт Элит (всего)">
@@ -623,7 +614,7 @@ export default function LeftScheduleV4({
                         }}
                         aria-label="Описание номеров Комфорт"
                       >
-                        {comfortTotalCount || "—"}
+                        {COMFORT_TOTAL}
                       </button>
                       <span className="v4-split-plus">+</span>
                       <button
@@ -635,7 +626,7 @@ export default function LeftScheduleV4({
                         }}
                         aria-label="Описание номера Элит"
                       >
-                        {eliteTotalCount || "—"}
+                        {ELITE_TOTAL}
                       </button>
                     </div>
                   </div>
@@ -643,17 +634,8 @@ export default function LeftScheduleV4({
               }
 
               return (
-                <div key={c.key} className={`xls-headcell xls-headcell--merged ${visible ? "" : "is-hidden"}`}>
-                  <div className="xls-headcell__title">
-                    {c.title.includes("\n")
-                      ? c.title.split("\n").map((t, i) => (
-                          <React.Fragment key={i}>
-                            {t}
-                            {i === 0 && <br />}
-                          </React.Fragment>
-                        ))
-                      : c.title}
-                  </div>
+                <div key={c.key} className={`xls-headcell xls-headcell--merged xls-headcell--${c.key} ${visible ? "" : "is-hidden"}`}>
+                  <div className="xls-headcell__title">{renderTitleWithBreaks(c.title)}</div>
                   <div className="xls-headcell__total">{c.totalLabel}</div>
                 </div>
               );
